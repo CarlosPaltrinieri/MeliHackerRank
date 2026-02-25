@@ -10,7 +10,8 @@ The solution was architected following **Clean Architecture** and **Domain-Drive
 
 ```mermaid
 graph TD
-    Client[Frontend / Test Suite] --> Controller[Controllers / Routers]
+    Client[Frontend / Test Suite] --> Middleware[TraceMiddleware]
+    Middleware --> Controller[Controllers / Routers]
     Controller --> Service[Services / Business Logic]
     Service --> Repository[Repositories / Data Access]
     Repository --> DB[(SQLite In-Memory)]
@@ -18,6 +19,7 @@ graph TD
     subgraph Core
         Response[ResponseExtension]
         Config[Database Config]
+        Log[Structured Logger]
     end
     
     subgraph Domain
@@ -25,6 +27,7 @@ graph TD
         Schemas[Pydantic Schemas]
     end
     
+    Middleware -.-> Log
     Controller -.-> Response
     Service -.-> Schemas
     Repository -.-> Models
