@@ -131,6 +131,7 @@ uv run pytest -v
 1.  **Product Focus**: Replaced the generic model provided in the Java boilerplate with a full CRUD specifically designed for the `Product` domain, matching the statement's request for "a product detail page".
 2.  **Standardized Response internally**: While the Controller can return flat formats expected by external systems, internally all services strictly return the standardized `ResponseExtension`, adhering to enterprise-level practices.
 3.  **TDD**: The implementation was driven by the testcases, ensuring 100% compliance with the expected constraints and HTTP status codes.
+4.  **Observability & Tracing**: Implemented a global middleware that intercepts all requests, generates a unique Trace ID, and measures processing time. These metrics are injected into the response headers (`X-Trace-ID`, `X-Process-Time`) and saved via structured logging (to console and a local `app.log` file), ensuring enterprise-level monitoring.
 
 ## 🤖 Tools Used
 
